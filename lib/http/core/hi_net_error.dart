@@ -1,4 +1,5 @@
 // 网络请求异常统一基类
+
 class HiNetError implements Exception {
   final int code;
   final String message;
@@ -15,6 +16,5 @@ class NeedAuth extends HiNetError {
 
 // 需要登录的异常处理
 class NeedLogin extends HiNetError {
-  NeedLogin({int code: 401, String message: '请先登录'})
-      : super(code, message);
+  NeedLogin({int code: 401, String message: '请先登录'}) : super(code, message);
 }
