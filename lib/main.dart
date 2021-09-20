@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bilibili/db/hi_cache.dart';
 import 'package:flutter_bilibili/http/core/hi_net.dart';
 import 'package:flutter_bilibili/http/core/hi_net_error.dart';
 import 'package:flutter_bilibili/http/request/test_request.dart';
@@ -52,6 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
   void _incrementCounter() async {
+    HiCache.preInit();
     TestRequest req = TestRequest();
     req.add('aa', 'ddd').add("bb", "333").add("requestPrams", "11111");
 
@@ -65,6 +67,8 @@ class _MyHomePageState extends State<MyHomePage> {
     } on HiNetError catch (e) {
       print(e);
     }
+
+    test2();
   }
 
   @override
@@ -117,5 +121,11 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
+  }
+
+  void test2() {
+    var instance = HiCache.getInstance();
+    instance.setString('aa', '1223');
+    print(instance.get('aa'));
   }
 }
