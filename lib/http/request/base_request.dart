@@ -1,6 +1,6 @@
 // 接口文档地址 https://api.devio.org/uapi/swagger-ui.html#/;
 // 封装枚举，http的请求方法
-enum HttpMethod{ GET, POST, DELETE }
+enum HttpMethod { GET, POST, DELETE }
 
 /*封装基础请求的抽象类
 * 参数支持跟在?后面的参数  eg. www.a.com/api?id=tyreal
@@ -54,12 +54,16 @@ abstract class BaseRequest {
   * 返回this可以支持链式调用
   * */
   BaseRequest add(String k, Object v) {
-     params[k] = v.toString();
-     return this;
+    params[k] = v.toString();
+    return this;
   }
 
   // header的Map对象
-  Map<String, dynamic> header = Map();
+  Map<String, dynamic> header = {
+    'course-flag': 'fa',
+    'auth-token': 'ZmEtMjAyMS0wNC0xMiAyMToyMjoyMC1mYQ==fa'
+  };
+
   // 添加header，同上
   BaseRequest addHeader(String k, Object v) {
     header[k] = v.toString();
