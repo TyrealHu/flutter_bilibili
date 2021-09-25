@@ -49,11 +49,9 @@ class HiNet {
       default:
         throw HiNetError(status!, result.toString(), data: result);
     }
-
-    return result;
   }
 
-  Future<dynamic> send<T>(BaseRequest req) async {
+  Future<HiNetResponse<T>> send<T>(BaseRequest req) async {
     HiNetAdapter adapter = DioAdapter();
     return adapter.send(req);
   }

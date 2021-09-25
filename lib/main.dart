@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bilibili/db/hi_cache.dart';
-import 'package:flutter_bilibili/http/core/hi_net.dart';
 import 'package:flutter_bilibili/http/core/hi_net_error.dart';
-import 'package:flutter_bilibili/http/request/test_request.dart';
+import 'package:flutter_bilibili/http/dao/login_or_register_dao.dart';
 
 void main() {
   runApp(MyApp());
@@ -53,22 +52,24 @@ class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
   void _incrementCounter() async {
-    HiCache.preInit();
-    TestRequest req = TestRequest();
-    req.add('aa', 'ddd').add("bb", "333").add("requestPrams", "11111");
+    // HiCache.preInit();
+    // TestRequest req = TestRequest();
+    // req.add('aa', 'ddd').add("bb", "333").add("requestPrams", "11111");
+    //
+    // try {
+    //   var result = await HiNet.getInstance().fire(req);
+    //   print(result.toString());
+    // } on NeedAuth catch (e) {
+    //   print(e);
+    // } on NeedLogin catch (e) {
+    //   print(e);
+    // } on HiNetError catch (e) {
+    //   print(e);
+    // }
 
-    try {
-      var result = await HiNet.getInstance().fire(req);
-      print(result.toString());
-    } on NeedAuth catch (e) {
-      print(e);
-    } on NeedLogin catch (e) {
-      print(e);
-    } on HiNetError catch (e) {
-      print(e);
-    }
+    // test2();
 
-    test2();
+    testLogin();
   }
 
   @override
@@ -127,5 +128,16 @@ class _MyHomePageState extends State<MyHomePage> {
     var instance = HiCache.getInstance();
     instance.setString('aa', '1223');
     print(instance.get('aa'));
+  }
+
+  void testLogin() async {
+    try {
+      var result = await LoginOrRegisterDao.login('tyreal', 'hwb2000211');
+      print(result);
+    } on NeedAuth catch (e) {
+      print(e);
+    } on HiNetError catch (e) {
+      print(e);
+    }
   }
 }
