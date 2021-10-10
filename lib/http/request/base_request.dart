@@ -1,5 +1,7 @@
 // 接口文档地址 https://api.devio.org/uapi/swagger-ui.html#/;
 // 封装枚举，http的请求方法
+import 'package:flutter_bilibili/http/dao/login_or_register_dao.dart';
+
 enum HttpMethod { GET, POST, DELETE }
 
 /*封装基础请求的抽象类
@@ -38,6 +40,11 @@ abstract class BaseRequest {
       uri = Uri.https(authority(), pathString, params);
     } else {
       uri = Uri.http(authority(), pathString, params);
+    }
+
+    if (needLogin()) {
+      addHeader(LoginOrRegisterDao.BOARDING_PSS,
+          LoginOrRegisterDao.getBoardingPass());
     }
 
     return uri.toString();
